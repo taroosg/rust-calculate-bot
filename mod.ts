@@ -28,8 +28,3 @@ bot.on('text', async (ctx) => {
 
 bot.launch();
 
-// serve((_req) => {
-//   return new Response("Hello World!", {
-//     headers: { "content-type": "text/plain" },
-//   });
-// });

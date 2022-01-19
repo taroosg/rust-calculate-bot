@@ -18,15 +18,15 @@ console.log(token);
 
 const bot = new Bot(token);
 
-// bot.on('text', async (ctx) => {
-//   const text = ctx.message?.text;
-//   if (text === '/hoge') {
-//     console.log(text);
-//     const res =  fib(Number(10)).toString() ;
+bot.on('text', async (ctx) => {
+  const text = ctx.message?.text;
+  if (text === '/hoge') {
+    console.log(text);
+    const res =  fib(Number(10)).toString() ;
 
-//     await ctx.reply(res);
-//   }
-// })
+    await ctx.reply(res);
+  }
+})
 
 // bot.launch();
 

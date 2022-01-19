@@ -64,8 +64,7 @@ async function load(module, imports) {
 
 async function init(input) {
   if (typeof input === 'undefined') {
-    // input = new URL('rust_calculate_bot_bg.wasm', import.meta.url);
-    input = import.meta.url.replace(/\.js$/, '_bg.wasm'); if ('undefined' !== typeof Deno) input = new WebAssembly.Module(await Deno.readFile(new URL(input).pathname));
+    input = new URL('rust_calculate_bot_bg.wasm', import.meta.url);
   }
   const imports = {};
 

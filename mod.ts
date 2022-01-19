@@ -1,17 +1,17 @@
 import { Bot } from './deps.ts';
 import init, { fib } from "./pkg/rust_calculate_bot.js";
 
-import * as pkg from './pkg/rust_calculate_bot.js'
-await pkg.default()
+// import * as pkg from './pkg/rust_calculate_bot.js'
+// await pkg.default()
 
-// if (Deno.env.get("ENVIRONMENT") === "production") {
-//   const res = await fetch(
-//     "https://raw.githubusercontent.com/taroosg/rust-calculate-bot/main/pkg/rust_calculate_bot_bg.wasm"
-//   );
-//   await init(await res.arrayBuffer());
-// } else {
-//   await init(Deno.readFile("./pkg/rust_calculate_bot_bg.wasm"));
-// }
+if (Deno.env.get("ENVIRONMENT") === "production") {
+  const res = await fetch(
+    "https://raw.githubusercontent.com/taroosg/rust-calculate-bot/main/pkg/rust_calculate_bot_bg.wasm"
+  );
+  await init(await res.arrayBuffer());
+} else {
+  await init(Deno.readFile("./pkg/rust_calculate_bot_bg.wasm"));
+}
 
 
 
@@ -25,13 +25,16 @@ bot.on('text', async (ctx) => {
   const text = ctx.message?.text;
   if (text === '/hoge') {
     console.log(text);
-    const res =  pkg.fib(Number(10)).toString() ;
+    const res =  fib(Number(10)).toString() ;
 
     await ctx.reply(res);
   }
 })
-
-bot.launch();
+try {
+  bot.launch();
+} catch (error) {
+  console.log(error);
+}
 
 // import { serve } from "https://deno.land/std/http/server.ts";
 // serve((req) => new Response("Hello world"));

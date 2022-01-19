@@ -16,6 +16,10 @@ const token = Deno.env.get("BOT_TOKEN") as string;
 
 console.log(token);
 
+
+
+import { serve } from "https://deno.land/std/http/server.ts";
+serve((req) => {
 const bot = new Bot(token);
 
 bot.on('text', async (ctx) => {
@@ -27,9 +31,5 @@ bot.on('text', async (ctx) => {
     await ctx.reply(res);
   }
 })
-
-
-import { serve } from "https://deno.land/std/http/server.ts";
-serve((req) => {
   bot.launch();
 });

@@ -16,7 +16,7 @@ const token = Deno.env.get("BOT_TOKEN") as string;
 
 console.log(token);
 
-// const bot = new Bot(token);
+const bot = new Bot(token);
 
 // bot.on('text', async (ctx) => {
 //   const text = ctx.message?.text;

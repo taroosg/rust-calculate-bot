@@ -4,7 +4,7 @@ import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
 
 if (Deno.env.get("ENVIRONMENT") === "production") {
   const res = await fetch(
-    "https://raw.githubusercontent.com/taroosg/rust-calsulate-bot/main/pkg/rust_calculate_bot_bg.wasm"
+    "https://raw.githubusercontent.com/taroosg/rust-calculate-bot/main/pkg/rust_calculate_bot_bg.wasm"
   );
   await init(await res.arrayBuffer());
 } else {

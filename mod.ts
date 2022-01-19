@@ -16,20 +16,19 @@ const token = Deno.env.get("BOT_TOKEN") as string;
 
 console.log(token);
 
+// const bot = new Bot(token);
 
+// bot.on('text', async (ctx) => {
+//   const text = ctx.message?.text;
+//   if (text === '/hoge') {
+//     console.log(text);
+//     const res =  fib(Number(10)).toString() ;
+
+//     await ctx.reply(res);
+//   }
+// })
+
+// bot.launch();
 
 import { serve } from "https://deno.land/std/http/server.ts";
-serve((req) => {
-const bot = new Bot(token);
-
-bot.on('text', async (ctx) => {
-  const text = ctx.message?.text;
-  if (text === '/hoge') {
-    console.log(text);
-    const res =  fib(Number(10)).toString() ;
-
-    await ctx.reply(res);
-  }
-})
-  bot.launch();
-});
+serve((req) => new Response("Hello world"));

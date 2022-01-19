@@ -1,0 +1,15 @@
+{
+  "name": "rust-calculate-bot",
+  "collaborators": [
+    "taroosg <root@taroosg.dev>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "rust_calculate_bot_bg.wasm",
+    "rust_calculate_bot.js",
+    "rust_calculate_bot.d.ts"
+  ],
+  "module": "rust_calculate_bot.js",
+  "types": "rust_calculate_bot.d.ts",
+  "sideEffects": false
+}

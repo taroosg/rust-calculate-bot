@@ -15,22 +15,22 @@ await init(Deno.readFile("./pkg/rust_calculate_bot_bg.wasm"));
 // 数値かどうかをチェックする関数
 const isNumber = (str:string):boolean => (new RegExp(/^[0-9]+$/)).test(str);
 
-const token = Deno.env.get("BOT_TOKEN") as string;
+// レスポンスを作成する関数
+const createResponse = (str: string | undefined ): string =>
+  !str
+    ? 'NaN'
+    : !isNumber(str)
+      ? 'NaN'
+      : !(Number(str) > 0)
+        ? '0'
+        : prime_factorization(Number(str)).join('\n');
 
-console.log(token);
+const token = Deno.env.get("BOT_TOKEN") as string;
 
 const bot = new Bot(token);
 
 bot.on('text', async (ctx) => {
-  const text = ctx.message?.text;
-  const res = !text
-    ? 'NaN'
-    : !isNumber(text)
-      ? 'NaN'
-      : !(Number(text) > 0)
-        ? '0'
-        : prime_factorization(Number(text)).join('\n');
-  await ctx.reply(res);
+  await ctx.reply(createResponse(ctx.message?.text));
 })
 
 bot.launch();

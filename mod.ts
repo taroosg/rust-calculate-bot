@@ -1,6 +1,6 @@
 import { Bot } from './deps.ts';
 import init, { fib } from "./pkg/rust_calculate_bot.js";
-import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
+// import { serve } from "https://deno.land/std@0.114.0/http/server.ts";
 
 if (Deno.env.get("ENVIRONMENT") === "production") {
   const res = await fetch(
@@ -8,7 +8,7 @@ if (Deno.env.get("ENVIRONMENT") === "production") {
   );
   await init(await res.arrayBuffer());
 } else {
-await init(Deno.readFile("./pkg/rust_calculate_bot_bg.wasm"));
+  await init(Deno.readFile("./pkg/rust_calculate_bot_bg.wasm"));
 }
 
 

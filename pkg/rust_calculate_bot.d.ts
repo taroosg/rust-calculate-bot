@@ -2,6 +2,11 @@
 /* eslint-disable */
 /**
 * @param {number} n
+* @returns {Uint32Array}
+*/
+export function prime_factorization(n: number): Uint32Array;
+/**
+* @param {number} n
 * @returns {BigInt}
 */
 export function fib(n: number): BigInt;
@@ -10,8 +15,10 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly prime_factorization: (a: number, b: number) => void;
   readonly fib: (a: number, b: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
+  readonly __wbindgen_free: (a: number, b: number) => void;
 }
 
 /**

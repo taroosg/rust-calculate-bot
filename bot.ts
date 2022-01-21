@@ -49,3 +49,5 @@ bot.on(
 );
 
 bot.start();
+
+export default Bot;

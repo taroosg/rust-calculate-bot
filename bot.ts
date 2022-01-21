@@ -1,5 +1,4 @@
-import { Bot } from "https://deno.land/x/grammy/mod.ts";
-import "https://deno.land/x/dotenv/load.ts";
+import { Bot } from './deps.ts';
 import init, { fib, prime_factorization } from "./pkg/rust_calculate_bot.js";
 
 if (Deno.env.get("ENVIRONMENT") === "production") {

@@ -19,7 +19,7 @@ const createResponse = (str: string | undefined ): string =>
     ? "NaN"
     : !(Number(str) > 0)
       ? "Not a Natural Number"
-      : str.length > 10
+      : str.length > 9
         ?'too big number'
         : prime_factorization(Number(str)).join("\n");
 

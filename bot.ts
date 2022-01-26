@@ -1,9 +1,9 @@
-import { Bot } from './deps.ts';
+import { Bot } from "./deps.ts";
 import init, { fib, prime_factorization } from "./pkg/rust_calculate_bot.js";
 
 if (Deno.env.get("ENVIRONMENT") === "production") {
   const res = await fetch(
-    "https://raw.githubusercontent.com/taroosg/rust-calculate-bot/main/pkg/rust_calculate_bot_bg.wasm"
+    "https://raw.githubusercontent.com/taroosg/rust-calculate-bot/main/pkg/rust_calculate_bot_bg.wasm",
   );
   await init(await res.arrayBuffer());
 } else {
@@ -11,17 +11,17 @@ if (Deno.env.get("ENVIRONMENT") === "production") {
 }
 
 // 数値かどうかをチェックする関数
-const isNumber = (str:string):boolean => (new RegExp(/^[0-9]+$/)).test(str);
+const isNumber = (str: string): boolean => (new RegExp(/^[0-9]+$/)).test(str);
 
 // レスポンスを作成する関数
 const createResponse = (str: string | undefined ): string =>
-  !str
-    ? 'NaN'
-    : !isNumber(str)
-      ? 'NaN'
-      : !(Number(str) > 0)
-        ? '0'
-        : prime_factorization(Number(str)).join('\n');
+  !str || !isNumber(str)
+    ? "NaN"
+    : !(Number(str) > 0)
+      ? "Not a Natural Number"
+      : str.length > 10
+        ?'too big number'
+        : prime_factorization(Number(str)).join("\n");
 
 const token = Deno.env.get("BOT_TOKEN") as string;
 
@@ -31,9 +31,13 @@ const bot = new Bot(token);
 bot.command("cat", (ctx) => ctx.reply("Nya!"));
 
 // テキスト
-bot.on("message:text", async (ctx) => await ctx.reply(createResponse(ctx.message?.text), {
-  reply_to_message_id: ctx.msg.message_id,
-}));
+bot.on(
+  "message:text",
+  async (ctx) =>
+    await ctx.reply(createResponse(ctx.message?.text), {
+      reply_to_message_id: ctx.msg.message_id,
+    }),
+);
 
 // 画像
 bot.on("message:photo", (ctx) => ctx.reply("Nice photo! Is that you?"));

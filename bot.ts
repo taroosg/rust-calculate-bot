@@ -34,7 +34,7 @@ bot.command("cat", (ctx) => ctx.reply("Nya!"));
 bot.on(
   "message:text",
   async (ctx) =>
-    await ctx.reply(createResponse(ctx.message?.text), {
+    await ctx.reply(`${ctx.message?.text}\n\n${createResponse(ctx.message?.text)}`, {
       reply_to_message_id: ctx.msg.message_id,
     }),
 );

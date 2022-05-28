@@ -6,15 +6,18 @@ import { serve } from "https://deno.land/std/http/server.ts";
 
 const handleUpdate = webhookCallback(bot, "std/http");
 
-serve(async (req) => {
-  if (req.method == "POST") {
-    try {
-      return await handleUpdate(req);
-    } catch (err) {
-      console.error(err);
-      return new Response();
+serve({
+  ["/" + Deno.env.get("BOT_TOKEN")]: async (req) => {
+    if (req.method == "POST") {
+      try {
+        return await handleUpdate(req);
+      } catch (err) {
+        console.error(err);
+      }
     }
-  }
-
-  return new Response();
+    return new Response();
+  },
+  "/": () => {
+    return new Response("Hello world!");
+  },
 });
